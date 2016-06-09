@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://soap.CapRuat/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="RegistroClienteSoapService" targetNamespace="http://soap.CapRuat/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://soap.CapRuat/" elementFormDefault="unqualified" targetNamespace="http://soap.CapRuat/" version="1.0">
+
+  <xs:element name="registroCliente" type="tns:registroCliente"/>
+
+  <xs:element name="registroClienteResponse" type="tns:registroClienteResponse"/>
+
+  <xs:complexType name="registroCliente">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="nombreCliente" type="xs:string"/>
+      <xs:element minOccurs="0" name="direccionCliente" type="xs:string"/>
+      <xs:element minOccurs="0" name="telefonoCliente" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="registroClienteResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:responseClienteDao"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="responseClienteDao">
+    <xs:sequence>
+      <xs:element name="continuarFlujo" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="mensaje" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="registroCliente">
+    <wsdl:part element="tns:registroCliente" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="registroClienteResponse">
+    <wsdl:part element="tns:registroClienteResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="RegistroClienteSoap">
+    <wsdl:operation name="registroCliente">
+      <wsdl:input message="tns:registroCliente" name="registroCliente">
+    </wsdl:input>
+      <wsdl:output message="tns:registroClienteResponse" name="registroClienteResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RegistroClienteSoapServiceSoapBinding" type="tns:RegistroClienteSoap">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="registroCliente">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="registroCliente">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="registroClienteResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RegistroClienteSoapService">
+    <wsdl:port binding="tns:RegistroClienteSoapServiceSoapBinding" name="RegistroClienteSoapPort">
+      <soap:address location="http://WOLF-LP:8080/CapRuat-web/RegistroClienteSoap"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
